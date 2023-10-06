@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Blog {
+  id    Int    @id @default(autoincrement()) @db.UnsignedInt
+  name  String @db.VarChar(255)
+  slug  String @unique @db.VarChar(255)
+  posts Post[]
+}
+
+model Post {
+  id        Int    @id @default(autoincrement()) @db.UnsignedInt
+  title     String @db.VarChar(255)
+  content   String @db.Text
+  viewCount Int    @default(0)
+  blogId    Int    @db.UnsignedInt
+  blog      Blog   @relation(fields: [blogId], references: [id], onDelete: Cascade)
+}
