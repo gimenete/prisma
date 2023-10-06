@@ -89,7 +89,7 @@ I think it would scale pretty well already, but there's a few things we could do
 
 Right now the database is configured to delete posts in cascade when a blog is deleted. In a real world scenario we would mark the blog as deleted with a `deletedAt` timestamp, filter out results with a non-null `deletedAt` timestamp (including blogs and their posts), and we would do the deletion in a background job. The reason is that deleting lots of rows at once could generate a spike of writes to the database that could affect the service.
 
-- How would you change the architecture to allow for models that are stored in different databases? E.g. posts are stored in Cassandra and blogs are stored in Postgres.
+### How would you change the architecture to allow for models that are stored in different databases? E.g. posts are stored in Cassandra and blogs are stored in Postgres.
 
 For the bonus task I've fully implemented a version that uses Prisma, and I've also implemented almost completely another version that works with DynamoDB. What I've done is creating clear interfaces ("inputs" and "responses") and two different implementations. If we wanted to implement a hybrid approach we would just implement a new "controllers" implementation with the same interfaces.
 
