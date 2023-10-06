@@ -303,4 +303,9 @@ async function main() {
 }
 
 // Uncomment to manually test the dynamodb implementation
-// main().then(console.log).catch(console.error);
+// main()
+//   .then(console.log)
+//   .catch((e) => {
+//     console.error(e);
+//     process.exit(1);
+//   });

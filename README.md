@@ -51,6 +51,14 @@ Tests assume the service is running. Then just run:
 npm t
 ```
 
+## DynamoDB implementation
+
+For the bonus exercise I've almost completely implemented a DynamoDB version. It doesn't have tests, but can be executed by commenting out the last lines of code in `src/controllers/dynamo.ts`. It needs a local dynamodb running like this:
+
+```bash
+java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb -port 2000
+```
+
 ## Questions
 
 ### What were some of the reasons you chose the technology stack that you did?
