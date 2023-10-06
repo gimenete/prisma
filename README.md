@@ -10,7 +10,7 @@ npm i
 
 Create an `.env` file like this:
 
-```
+```env
 DATABASE_URL="mysql://root@localhost/prisma_take_home_test"
 PORT=8080
 ```
@@ -19,7 +19,7 @@ The `PORT` is optional and it defaults to `8080`.
 
 Run migrations:
 
-```
+```bash
 npx prisma migrate deploy
 ```
 
@@ -51,21 +51,21 @@ Tests assume the service is running. Then just run:
 npm t
 ```
 
-## Questions
+## Questions
 
-- What were some of the reasons you chose the technology stack that you did?
+### What were some of the reasons you chose the technology stack that you did?
 
 I've chosen a relational database (MySQL), Prisma and TypeScript because those are the most convinient technologies to me to build something that needs to persist data into a database. They give me full type safety and fast iteration loops. I've chosen MySQL because I'm familiar with it and because unlike other databases such as PostgreSQL, it automatically indexes foreign keys, which makes things a little easier.
 
 For the microservice transport layer I've chosen tRPC because it's ideal when using TypeScript: it allows to create a fully typed API over HTTP and it's easier to consume and test than GraphQL. For example it supports advanced type validation using zod, so it not only checks if something is a string, but it allows checking if an argument passes a regular expression check or has a minimum or maximum length.
 
-- What were some of the trade-offs you made when building this application? Why were these acceptable trade-offs?
+### What were some of the trade-offs you made when building this application? Why were these acceptable trade-offs?
 
 tRPC is not the best solution if you are consuming the microservice from a programming language other than TypeScript. In an scenario where that's a problem I'd have chosen gRPC or Twirp. However I chose tRPC because it's simpler to implement if we can restrict the solution to TypeScript.
 
 If we knew that we were going to only use Prisma, another nice option could've been GraphQL implemented with Pothos because it has a Prisma plugin that makes it easier to build GraphQL APIs given a Prisma schema, and additionally solves N+1 problems without additional efforts.
 
-- Given more time, what improvements or optimizations would you want to add?
+### Given more time, what improvements or optimizations would you want to add?
 
 I've only implemented the basic endpoints from the exercise description. If I had more time I'd add other endpoints such as for retrieving posts by some criteria, sorting, adding pagination (specifically cusor-based pagination), authorization, etc.
 
@@ -75,11 +75,11 @@ Additionally, the dynamodb implementation lacks testing.
 
 Finally, it'd be useful to do some load testing, to make sure how far we can go with the current implementation.
 
-- When would you add them?
+### When would you add them?
 
 Authorization is something fundamental before putting the microservice in production, so I'd do that immediately. While adding new functionality or more use cases would be something to do only when the consumer of the microservice requires it.
 
-- What would you need to do to make this application scale to hundreds of thousands of users?
+### What would you need to do to make this application scale to hundreds of thousands of users?
 
 I think it would scale pretty well already, but there's a few things we could do to make it scale even more.
 
